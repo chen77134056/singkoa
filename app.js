@@ -7,9 +7,12 @@ var path =require('path');
 const bodyParser = require('koa-bodyparser');
 const convert = require('koa-convert');
 const cors = require('koa2-cors');
+const onerror = require('koa-onerror');
+const jwt = require('koa-jwt');
+const secret = 'jwt demo'
 
 var app=new koa();
-
+onerror(app);
 
 var index=require('./routes/index');
 var admin=require('./routes/admin');
@@ -20,8 +23,20 @@ app.use(views(path.join(__dirname, './views'), {
 }));
 
 
+app.use(async (ctx,next)=>{
+    console.log('app.js里面'+ctx.cookies.get('state'));
+    ctx.request.header = {'authorization': "Bearer " + ctx.cookies.get('state')}
+    await next();
+});
+
+app.use(jwt({secret}).unless({
+    path: ['/'] //数组中的路径不需要通过jwt验证
+}));
+
 app.use(convert(bodyParser()));
 app.use(convert(logger()));
+
+
 app.use(require('koa-static')(__dirname + '/public'));
 
 app.use(cors({

@@ -1,8 +1,12 @@
+//test.js中间件
+function log( ctx ) {
+    console.log( '执行自定义中间件' );
 
+}
 
-;(async function () {
-
-    process.send({ Hello: '老爸我是儿子' }); //向老爸发送信息
-    process.exit(0);  //儿子发数据给老爸后，任务完成退出。
-
-})();
+module.exports = function () {
+    return async function ( ctx, next ) {
+        log(ctx);
+        await next()
+    }
+};

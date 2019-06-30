@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>33</title>
+    <script src="http://localhost:3000/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script>
+        $(function () {
+            console.log('Bearer '+ $.cookie('state'));
+            $.ajax({
+                headers: {
+                    'Authorization':'Bearer '+$.cookie('state')
+                },
+            });
+        });
+    </script>
+</head>
+<body>
+
+<%= title %>
+
+<form action="/upload" enctype="multipart/form-data" method="post">
+    <input type="text" name="username" placeholder="username"><br>
+    <input type="text" name="title" placeholder="title of file"><br>
+    <input type="file" name="file" multiple="multiple"><br>
+    <button>Upload</button>
+</form>
+
+
+</body>
+</html>

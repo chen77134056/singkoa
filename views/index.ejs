@@ -2,8 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>33</title>
+    <script src="http://localhost:3000/js/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script>
+        $(function () {
+            console.log('Bearer '+ $.cookie('state'));
+            $.ajax({
+                headers: {
+                    'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoxMjMsImlhdCI6MTU2MTc4NzU1MSwiZXhwIjoxNTYxNzg3NjExfQ.M13x7ZB2CSLkCTnhTo4akLZpMhL_r-txrjE1LyNrswI'
+                },
+            });
+        });
+    </script>
 </head>
 <body>
 
